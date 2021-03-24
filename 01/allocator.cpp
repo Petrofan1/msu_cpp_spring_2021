@@ -17,7 +17,7 @@ void Allocator::makeAllocator(size_t maxSize)
 
 char *Allocator::alloc(size_t size)
 {
-    if (curSize - offset < size)
+    if (offset + size > curSize)
         return nullptr;
     offset += size;
     return ptr + offset - size;

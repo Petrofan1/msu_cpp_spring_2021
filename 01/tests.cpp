@@ -12,7 +12,7 @@ void DefaultSeqAllocTest()
 {
     Allocator A;
     A.makeAllocator(500);
-    char *ptr, *ptr_1, *ptr_2;
+    char *ptr_1, *ptr_2;
     ptr_1 = A.alloc(250);
     ptr_2 = A.alloc(250);
     assert(ptr_1 != nullptr and ptr_2 != nullptr);
@@ -41,8 +41,9 @@ void OverfullSeqAllocTest()
 {
     Allocator A;
     A.makeAllocator(500);
-    char *ptr, *ptr_1, *ptr_2;
+    char *ptr_1, *ptr_2;
     ptr_1 = A.alloc(300);
+    assert(ptr_1 != nullptr);
     ptr_2 = A.alloc(300);
     assert(ptr_2 == nullptr);
 }
@@ -52,6 +53,7 @@ void OverfullReallocTest()
     A.makeAllocator(500);
     char *ptr_1, *ptr_2;
     ptr_1 = A.alloc(500);
+    assert(ptr_1 != nullptr);
     A.reset();
     ptr_2 = A.alloc(600);
     assert(ptr_2 == nullptr);

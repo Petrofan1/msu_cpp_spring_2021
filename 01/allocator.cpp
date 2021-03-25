@@ -1,4 +1,4 @@
-#include "header.hpp"
+#include "allocator.hpp"
 
 Allocator::Allocator()
 {
@@ -9,9 +9,10 @@ Allocator::Allocator()
 
 void Allocator::makeAllocator(size_t maxSize)
 {
-    if (curSize)
+    if (ptr != nullptr)
         delete[] ptr;
     curSize = maxSize;
+    offset = 0;
     ptr = new char[curSize];
 }
 
@@ -30,6 +31,6 @@ void Allocator::reset()
 
 Allocator::~Allocator()
 {
-    if (curSize)
+    if (ptr != nullptr)
         delete[] ptr;
 }

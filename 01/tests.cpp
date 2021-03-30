@@ -68,7 +68,19 @@ void MakeAllocatorRecallTest()
     ptr = A.alloc(16);
     assert(ptr != nullptr);
 }
-
+void BoundaryConditionsTest()
+{
+    Allocator A;
+    char *ptr;
+    A.makeAllocator(10);
+    ptr = A.alloc(10);
+    assert(ptr != nullptr);
+    ptr = A.alloc(1);
+    assert(ptr == nullptr);
+    A.reset();
+    ptr = A.alloc(10);
+    assert(ptr != nullptr);
+}
 int main()
 {
     DefaultUsageTest();
@@ -78,6 +90,7 @@ int main()
     OverfullSeqAllocTest();
     OverfullReallocTest();
     MakeAllocatorRecallTest();
+    BoundaryConditionsTest();
     std::cout << "Success!" << std::endl;
     return 0;
 }
